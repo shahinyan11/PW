@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Wrapper from "../components/Wrapper";
 import {getTransactionList} from "../store/actions";
-import CreateTransactionForm from "../components/forms/CreateTransactionForm";
 import TransactionsTable from "../components/TransactionsTable";
 
 class Home extends Component {
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.getTransactionList()
     }
 

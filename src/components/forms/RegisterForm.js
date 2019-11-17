@@ -25,7 +25,6 @@ const validate = (values) => {
 class RegisterForm extends Component {
 
     handleSubmit =(values) => {
-        const {history} = this.props;
         const data = {
             username: values.name,
             password: values.password,
@@ -36,14 +35,13 @@ class RegisterForm extends Component {
                 if (errors) {
                     reject(new SubmissionError(errors));
                 }
-                // history.push('/account');
                 resolve();
             });
         })
     }
 
     render() {
-        const {error, handleSubmit, pristine, reset, submitting, token} = this.props;
+        const {error, handleSubmit, submitting, token} = this.props;
         if (token) {
             // return <Redirect to="/account"/>
         }

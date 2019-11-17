@@ -30,10 +30,7 @@ class SignInForm extends Component {
   }
 
   render() {
-    const {error, handleSubmit, pristine, reset, submitting, token} = this.props;
-    if (token) {
-      // return <Redirect to="/account"/>
-    }
+    const {error, handleSubmit, submitting} = this.props;
     return (
       <form className={'SignInForm'}  onSubmit={handleSubmit(this.handleSubmit)}>
         <Field name="email" component={RenderTextField} label="Email"/>

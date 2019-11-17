@@ -45,7 +45,7 @@ class CreateTransactionForm extends Component {
     }
 
     handleSubmit =(values) => {
-        const {name, amount, resetForm} = this.state
+        const {name, amount} = this.state
         return new Promise((resolve, reject) => {
             this.props.createTransaction({name, amount}, (errors) => {
                 if (errors) {
@@ -81,8 +81,6 @@ class CreateTransactionForm extends Component {
         const {
             error,
             handleSubmit,
-            pristine,
-            reset,
             submitting,
             filterUsers,
         } = this.props;
