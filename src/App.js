@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {connect} from "react-redux";
+import PrivateRouter from "./components/PrivateRouter";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Page404 from "./pages/Page404";
+import {getUserInfo} from "./store/actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    componentWillMount() {
+        if (localStorage.getItem('id_token')) {
+            this.props.getUserInfo();
+        }
+    }
+
+  render (){
+      return (
+          <BrowserRouter>
+              <div>
+                  <Switch>
+                      <PrivateRouter exact path='/' component={Home}/>
+                      <Route exact path='/login' component={Login}/>
+                      <PrivateRouter exact path='/home' component={Home}/>
+                      {/*<Route component={Page404}/>*/}
+                  </Switch>
+              </div>
+          </BrowserRouter>
+      );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = {
+    getUserInfo
+};
+
+const AppContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(App);
+
+export default AppContainer;
